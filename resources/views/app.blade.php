@@ -7,10 +7,11 @@
 
   <title>{{ config('app.name', 'Vue laravel SPA') }}</title>
 
-  <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-  <div id="app"></div>
-  <script src="{{ mix('/js/app.js') }}" defer></script>
+  <div id="app">
+    <example-component></example-component>
+  </div>
 </body>
 </html>
