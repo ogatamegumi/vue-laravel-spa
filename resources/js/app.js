@@ -24,4 +24,6 @@ const app = createApp({});
 app.component('example-component', ExampleComponent);
 app.component('header-component', HeaderComponent)
 
+app.use(router)
+
 app.mount('#app', router);
