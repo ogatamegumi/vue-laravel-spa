@@ -4,15 +4,30 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import { createRouter, createWebHistory } from 'vue-router';
 import './bootstrap';
 import { createApp } from 'vue';
 import HeaderComponent from './components/HeaderComponent.vue';
+import TaskListComponent from './components/TaskListComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
+
+const routes = [
+  {
+    path: '/tasks',
+    name: 'task.list',
+    component: TaskListComponent
+  },
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 const app = createApp({});
 
@@ -38,4 +53,4 @@ app.component('header-component', HeaderComponent)
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.mount('#app', router);
