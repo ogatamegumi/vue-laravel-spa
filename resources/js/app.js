@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import HeaderComponent from './components/HeaderComponent.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -17,6 +18,7 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
+app.component('header-component', HeaderComponent)
 
 /**
  * The following block of code may be used to automatically register your
