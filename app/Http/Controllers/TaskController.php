@@ -21,4 +21,11 @@ class TaskController extends Controller
     {
         return Task::create($request->all());
     }
+
+    public function update(Request $request, Task $Task)
+    {
+        $task->update($request->all());
+
+        return $task;
+    }
 }
