@@ -6,6 +6,7 @@ import HeaderComponent from './components/HeaderComponent.vue';
 import TaskListComponent from './components/TaskListComponent.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
 import TaskShowComponent from './components/TaskShowComponent.vue';
+import TaskCreateComponent from './components/TaskCreateComponent.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     component: TaskShowComponent,
     props: true
   },
+  {
+    path: '/tasks/create',
+    name: 'task.create',
+    component: TaskCreateComponent
+  }
 ];
 
 const router = createRouter({
