@@ -7,6 +7,7 @@ import TaskListComponent from './components/TaskListComponent.vue';
 import ExampleComponent from './components/ExampleComponent.vue';
 import TaskShowComponent from './components/TaskShowComponent.vue';
 import TaskCreateComponent from './components/TaskCreateComponent.vue';
+import TaskEditComponent from './components/TaskEditComponent.vue';
 
 const routes = [
   {
@@ -24,6 +25,12 @@ const routes = [
     path: '/tasks/create',
     name: 'task.create',
     component: TaskCreateComponent
+  },
+  {
+    path: '/tasks/:taskId/edit',
+    name: 'task.edit',
+    component: TaskEditComponent,
+    props: true
   }
 ];
 
