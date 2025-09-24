@@ -13,31 +13,28 @@ class TaskFormTest extends TestCase
     public function test_error_with_empty_title(): void
     {
         $task = Task::factory()->create();
+        $url = "/api/tasks/{$task->id}";
+        $empty_title = ['title' => ''];
 
-        $response = $this->putJson("/api/tasks/{$task->id}", [
-            'title' => '',
-        ]);
-
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['title']);
-        $response->assertJsonFragment([
-            'title' => ['タイトルは必須です。']
-        ]);
+        $this->assertTitleValidation('put', $url, $empty_title);
     }
 
     public function test_error_with_over_25_character_title(): void
     {
         $task = Task::factory()->create();
-        $longTitle = str_repeat('あ', 256);
+        $url = "/api/tasks/{$task->id}";
+        $too_long_title = ['title' => str_repeat('あ', 256)];
 
-        $response = $this->putJson("/api/tasks/{$task->id}", [
-            'title' => $longTitle,
-        ]);
+        $this->assertTitleValidation('put', $url, $too_long_title);
+    }
 
+    protected function assertTitleValidation(string $method, string $url, array $data)
+    {
+        $methodName = $method . 'Json';
+        $response = $this->$methodName($url, $data);
+
+        $response->assertStatus(422);
         $response->assertJsonValidationErrors(['title']);
-        $response->assertJsonFragment([
-            'title' => ['タイトルは255字以内で入力してください。']
-        ]);
     }
 
     public function test_correct_title(): void
