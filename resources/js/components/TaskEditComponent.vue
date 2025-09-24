@@ -36,6 +36,9 @@ export default {
     return {
       task: {},
       errors: {},
+      requiredFields: {
+        title: true
+      }
     }
   },
   methods: {
@@ -46,7 +49,13 @@ export default {
           });
     },
     submit() {
-this.errors = {};
+      this.errors = {};
+
+      if (this.requiredFields.title && !this.task.title) {
+        this.errors.title = ['タイトルは必須です。'];
+        return;
+      }
+
       axios.put('/api/tasks/' + this.taskId, this.task)
           .then(() => {
             this.$router.push({name: 'task.list'});
