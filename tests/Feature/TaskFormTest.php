@@ -39,4 +39,18 @@ class TaskFormTest extends TestCase
             'title' => ['タイトルは255字以内で入力してください。']
         ]);
     }
+
+    public function test_correct_title(): void
+    {
+        $task = Task::factory()->create();
+
+        $response = $this->putJson("/api/tasks/{$task->id}", [
+            'title' => 'テストタイトル',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('tasks', [
+            'title' => 'テストタイトル',
+        ]);
+    }
 }
