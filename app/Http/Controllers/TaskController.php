@@ -18,9 +18,9 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function store(Request $request)
+    public function store(TaskForm $request)
     {
-        return Task::create($request->all());
+        return Task::create($request->validated());
     }
 
     public function update(TaskForm $request, Task $task)
