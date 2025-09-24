@@ -8,3 +8,8 @@ Vue → `npm run dev`
 
 ### テスト実行
 `php vendor/phpunit/phpunit/phpunit <相対パス>`
+
+### DB
+migration → `php artisan migrate`
+
+seeder → `php artisan db:seed`
