@@ -46,6 +46,7 @@ export default {
           });
     },
     submit() {
+this.errors = {};
       axios.put('/api/tasks/' + this.taskId, this.task)
           .then(() => {
             this.$router.push({name: 'task.list'});
