@@ -8,8 +8,9 @@
             <input type="text" class="col-sm-9 form-control-plaintext" readonly id="id" v-model="task.id">
           </div>
           <div class="form-gropu row">
-            <label for="title" class="col-sm-3 col-form-label">Title</label>
+            <label for="title" class="col-sm-3 col-form-label">Title<span class="text-danger">*</span></label>
             <input type="text" class="col-sm-9 form-control" id="title" v-model="task.title">
+            <span v-if="errors.title" class="text-danger">{{ errors.title[0] }}</span>
           </div>
           <div class="form-gropu row">
             <label for="content" class="col-sm-3 col-form-label">Content</label>
@@ -33,7 +34,8 @@ export default {
   },
   data: function() {
     return {
-      task: {}
+      task: {},
+      errors: {},
     }
   },
   methods: {
@@ -48,6 +50,11 @@ export default {
           .then(() => {
             this.$router.push({name: 'task.list'});
           })
+          .catch(error => {
+            if (error.response.status === 422) {
+                this.errors = error.response.data.errors;
+            }
+          });
     }
   },
   mounted() {

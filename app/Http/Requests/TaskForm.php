@@ -18,11 +18,11 @@ class TaskForm extends FormRequest
         ];
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'title.required' => 'タイトルは必須です。',
-    //         'title.max' => 'タイトルは255字以内で入力してください。',
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            'title.required' => 'タイトルは必須です。',
+            'title.max' => 'タイトルは255字以内で入力してください。',
+        ];
+    }
 }
