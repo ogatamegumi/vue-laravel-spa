@@ -5,6 +5,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Title</th>
+          <th scope="col">Completed</th>
           <th scope="col">Content</th>
           <th scope="col">Person In Change</th>
           <th scope="col">Show</th>
@@ -16,6 +17,7 @@
         <tr v-for="(task, index) in tasks" :key="index">
           <th scope="row">{{ task.id }}</th>
             <td>{{ task.title }}</td>
+            <td>{{ task.is_completed ? '☑' : '☐' }}</td>
             <td>{{ task.content }}</td>
             <td>{{ task.person_in_charge }}</td>
             <td>
