@@ -4,6 +4,11 @@
       <div class="col-sm-6">
         <form @submit.prevent="submit">
           <div class="form-gropu row">
+            <label for="is_completed" class="col-sm-3 col-form-label">
+              <input type="checkbox" class="mx-1" id="is_completed" v-model="task.is_completed">完了
+            </label>
+          </div>
+          <div class="form-gropu row">
             <label for="id" class="col-sm-3 col-form-label">ID</label>
             <input type="text" class="col-sm-9 form-control-plaintext" readonly id="id" v-model="task.id">
           </div>
@@ -50,6 +55,7 @@ export default {
     },
     submit() {
       this.errors = {};
+      console.log('Submitted Task:', this.task.is_completed);
 
       if (this.requiredFields.title && !this.task.title) {
         this.errors.title = ['タイトルは必須です。'];

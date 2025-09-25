@@ -1,10 +1,19 @@
 <template>
   <div class="container">
+    <div class="p-3">
+      <label>絞りこみ検索</label>
+      <select v-model="filterStatus" @change="fetchTasks">
+          <option :value="null">すべて</option>
+          <option :value="false">未完了</option>
+          <option :value="true">完了</option>
+      </select>
+    </div>
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Title</th>
+          <th scope="col">Completed</th>
           <th scope="col">Content</th>
           <th scope="col">Person In Change</th>
           <th scope="col">Show</th>
@@ -16,6 +25,7 @@
         <tr v-for="(task, index) in tasks" :key="index">
           <th scope="row">{{ task.id }}</th>
             <td>{{ task.title }}</td>
+            <td>{{ task.is_completed ? '☑' : '☐' }}</td>
             <td>{{ task.content }}</td>
             <td>{{ task.person_in_charge }}</td>
             <td>
@@ -41,7 +51,8 @@
   export default {
     data: function() {
       return {
-        tasks: []
+        tasks: [],
+        filterStatus: [],
       }
     },
     methods: {
@@ -56,10 +67,18 @@
             .then(() => {
               this.getTasks();
             });
+      },
+      fetchTasks() {
+        axios.get('/api/tasks', {
+            params: { is_completed: this.filterStatus }
+        }).then(res => {
+            this.tasks = res.data;
+        });
       }
     },
     mounted() {
       this.getTasks();
+      this.fetchTasks();
     }
   }
 </script>

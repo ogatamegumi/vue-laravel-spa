@@ -8,9 +8,9 @@ use App\Http\Requests\TaskForm;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Task::all();
+        return Task::filterByCompleted($request)->get();
     }
 
     public function show(Task $task)

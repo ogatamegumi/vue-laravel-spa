@@ -18,6 +18,7 @@ class TasksTableSeeder extends Seeder
                 'title' => 'title' . $i,
                 'content' => 'content' .$i,
                 'person_in_charge' => 'person_in_charge' . $i,
+                'is_completed' => ($i % 2 === 0),
             ]);
         }
     }

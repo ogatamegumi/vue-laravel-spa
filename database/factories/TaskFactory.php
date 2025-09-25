@@ -20,6 +20,7 @@ class TaskFactory extends Factory
             'title' => $this->faker->text(25),
             'content' => $this->faker->sentence,
             'person_in_charge' => $this->faker->name,
+            'is_completed' => false
         ];
     }
 }
