@@ -7,7 +7,10 @@ Laravel → `php artisan serve`
 Vue → `npm run dev`
 
 ### テスト実行
-`php vendor/phpunit/phpunit/phpunit <相対パス>`
+unit → `php vendor/phpunit/phpunit/phpunit <相対パス>`
+feature → 
+`php artisan test <相対パス>`
+`$response->dd(); // レスポンス全体をダンプしてテストを強制終了`
 
 ### DB
 migration → `php artisan migrate`

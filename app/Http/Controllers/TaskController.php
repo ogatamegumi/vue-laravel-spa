@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Http\Requests\TaskForm;
 
 class TaskController extends Controller
 {
@@ -17,14 +18,14 @@ class TaskController extends Controller
         return $task;
     }
 
-    public function store(Request $request)
+    public function store(TaskForm $request)
     {
-        return Task::create($request->all());
+        return Task::create($request->validated());
     }
 
-    public function update(Request $request, Task $task)
+    public function update(TaskForm $request, Task $task)
     {
-        $task->update($request->all());
+        $task->update($request->validated());
 
         return $task;
     }
