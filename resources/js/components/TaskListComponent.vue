@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <div class="p-3">
+      <label>絞りこみ検索</label>
+      <select v-model="filterStatus" @change="fetchTasks">
+          <option :value="null">すべて</option>
+          <option :value="false">未完了</option>
+          <option :value="true">完了</option>
+      </select>
+    </div>
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -43,7 +51,8 @@
   export default {
     data: function() {
       return {
-        tasks: []
+        tasks: [],
+        filterStatus: [],
       }
     },
     methods: {
@@ -58,10 +67,18 @@
             .then(() => {
               this.getTasks();
             });
+      },
+      fetchTasks() {
+        axios.get('/api/tasks', {
+            params: { is_completed: this.filterStatus }
+        }).then(res => {
+            this.tasks = res.data;
+        });
       }
     },
     mounted() {
       this.getTasks();
+      this.fetchTasks();
     }
   }
 </script>

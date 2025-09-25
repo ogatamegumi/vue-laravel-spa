@@ -19,4 +19,13 @@ class Task extends Model
     protected $casts = [
         'is_completed' => 'boolean',
     ];
+
+    public function scopeFilterByCompleted($query, $request)
+    {
+        if ($request->has('is_completed')) {
+            $query->where('is_completed', $request->boolean('is_completed'));
+        }
+
+        return $query;
+    }
 }
