@@ -21,19 +21,17 @@
         </h3>
 
         <!-- オプション -->
-        <div v-if="product.options" class="mb-4">
-          <div class="mb-2">
-            <strong class="me-2">カラー:</strong>
-            <span class="badge bg-secondary me-1" v-for="(c, i) in product.options.color" :key="i">
-              {{ c }}
-            </span>
-          </div>
-          <div>
-            <strong class="me-2">サイズ:</strong>
-            <span class="badge bg-light text-dark border me-1" v-for="(s, i) in product.options.size" :key="i">
-              {{ s }}
-            </span>
-          </div>
+        <div v-if="product.options">
+            <ProductOptions
+                :options="product.options"
+                v-model="selectedOptions"
+            />
+        </div>
+        <div class="mt-3">
+            <strong>選択内容:</strong>
+            <p>カラー: {{ selectedOptions.color || '-' }}</p>
+            <p>サイズ: {{ selectedOptions.size || '-' }}</p>
+            <p>数量: {{ selectedOptions.quantity }}</p>
         </div>
 
         <!-- ボタン -->
@@ -52,13 +50,16 @@
 
 
 <script>
+import ProductOptions from './ProductOptionsComponent.vue';
+
 export default {
     props: {
         productId: String
     },
     data: function() {
         return {
-            product: {}
+            product: {},
+            selectedOptions: { color: '', size: '' }
         }
     },
     methods: {
@@ -71,6 +72,9 @@ export default {
     },
     mounted() {
         this.getProduct();
-    }
+    },
+    components: {
+        ProductOptions
+    },
 }
 </script>
