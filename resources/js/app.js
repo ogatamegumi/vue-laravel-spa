@@ -8,6 +8,7 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import TaskShowComponent from './components/TaskShowComponent.vue';
 import TaskCreateComponent from './components/TaskCreateComponent.vue';
 import TaskEditComponent from './components/TaskEditComponent.vue';
+import ShopPageComponent from './components/shopping/ShopPageComponent.vue';
 
 const routes = [
   {
@@ -31,7 +32,12 @@ const routes = [
     name: 'task.edit',
     component: TaskEditComponent,
     props: true
-  }
+  },
+  {
+    path: '/shopping',
+    name: 'shopping',
+    component: ShopPageComponent,
+  },
 ];
 
 const router = createRouter({
