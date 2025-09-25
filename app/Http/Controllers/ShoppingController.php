@@ -12,4 +12,9 @@ class ShoppingController extends Controller
     {
         return Product::all();
     }
+
+    public function show(Product $product)
+    {
+        return $product;
+    }
 }

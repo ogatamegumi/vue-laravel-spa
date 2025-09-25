@@ -25,3 +25,4 @@ Route::get('/tasks/{task}', [TaskController::class, 'show']);
 Route::put('/tasks/{task}', [TaskController::class, 'update']);
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
 Route::get('/shopping', [ShoppingController::class, 'index']);
+Route::get('/product/{product}', [ShoppingController::class, 'show']);

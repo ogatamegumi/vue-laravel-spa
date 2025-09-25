@@ -8,7 +8,7 @@
                     v-for="(product, index) in products"
                     :key="index"
                 >
-                    <div class="card h-100 shadow-sm">
+                    <router-link :to="{ name: 'product.show', params: { productId: product.id } }" class="card text-decoration-none h-100 shadow-sm">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
@@ -23,7 +23,7 @@
                                 >
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </div>
