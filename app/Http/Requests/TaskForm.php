@@ -17,6 +17,7 @@ class TaskForm extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'nullable|string',
             'person_in_charge' => 'nullable|string',
+            'is_completed' => 'boolean',
         ];
     }
 
