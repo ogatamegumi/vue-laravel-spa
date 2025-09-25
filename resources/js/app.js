@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/shopping',
-    name: 'shopping',
+    name: 'shopping.list',
     component: ShopPageComponent,
   },
 ];

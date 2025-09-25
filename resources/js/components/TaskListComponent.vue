@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <ShopPageComponent />
-    <hr>
     <div class="p-3">
       <label>絞りこみ検索</label>
       <select v-model="filterStatus" @change="fetchTasks">

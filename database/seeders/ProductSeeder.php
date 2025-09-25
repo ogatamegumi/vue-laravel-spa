@@ -15,10 +15,10 @@ class ProductSeeder extends Seeder
                 'name' => '商品' . $i,
                 'description' => '説明文' . $i,
                 'price' => ($i * 100),
-                'options' => json_encode([
+                'options' => [
                     'color' => ['赤','青','黄'],
                     'size' => ['S','M','L']
-                ]),
+                ],
                 'is_active' => true,
             ]);
         }

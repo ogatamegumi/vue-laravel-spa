@@ -16,4 +16,8 @@ class Product extends Model
         'options',
         'is_active',
     ];
+
+    protected $casts = [
+        'options' => 'array',
+    ];
 }
