@@ -35,14 +35,12 @@
         </div>
 
         <!-- ボタン -->
-        <!-- <div class="d-flex gap-3">
-          <button class="btn btn-outline-secondary" @click="$router.back()">
+         <div class="d-flex gap-3">
+          <!--<button class="btn btn-outline-secondary" @click="$router.back()">
             ← 戻る
-          </button>
-          <button class="btn btn-primary">
-            🛒 カートに追加
-          </button>
-        </div> -->
+          </button>-->
+          <PurchaseButton v-if="product.id" :product-id="product.id" />
+        </div>
       </div>
     </div>
   </div>
@@ -51,10 +49,12 @@
 
 <script>
 import ProductOptions from './ProductOptionsComponent.vue';
+import PurchaseButton from './PurchaseButtonComponent.vue';
 
 export default {
     props: {
-        productId: String
+        productId: Number,
+        requires: true,
     },
     data: function() {
         return {
@@ -74,7 +74,8 @@ export default {
         this.getProduct();
     },
     components: {
-        ProductOptions
+        ProductOptions,
+        PurchaseButton,
     },
 }
 </script>
