@@ -19,6 +19,10 @@ export default {
             type: Number,
             required: true,
         },
+        selectedOptions: {
+            type: Object,
+            required: true,
+        },
     },
     data() {
         return {
@@ -29,7 +33,11 @@ export default {
         async purchase() {
             await axios.post("/api/purchase", {
                 product_id: this.productId,
-                quantity: 1,
+                quantity: this.selectedOptions.quantity,
+                options: {
+                    color: this.selectedOptions.color,
+                    size: this.selectedOptions.size,
+                }
             });
             this.purchased = true;
         },

@@ -17,10 +17,10 @@
     </div>
 
     <!-- 数量 -->
-    <!-- <div class="mb-2">
+    <div class="mb-2">
       <label>数量:</label>
       <input type="number" min="1" v-model.number="localValue.quantity" @input="updateParent" class="form-control">
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
     },
     modelValue: {
       type: Object,
-      default: () => ({ color: '', size: '' })
+      default: () => ({ color: '', size: '' , quantity: '' })
     }
   },
   data() {

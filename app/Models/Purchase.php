@@ -17,7 +17,12 @@ class Purchase extends Model
     protected $fillable = [
         'product_id',
         'quantity',
+        'options',
         'purchased_at',
+    ];
+
+    protected $casts = [
+        'options' => 'array',
     ];
 
     protected static function booted()

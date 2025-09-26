@@ -27,11 +27,11 @@
                 v-model="selectedOptions"
             />
         </div>
-        <div class="mt-3">
+        <div class="mt-3"> <!--後でここモーダル化したいな-->
             <strong>選択内容:</strong>
             <p>カラー: {{ selectedOptions.color || '-' }}</p>
             <p>サイズ: {{ selectedOptions.size || '-' }}</p>
-            <p>数量: {{ selectedOptions.quantity }}</p>
+            <p>数量: {{ selectedOptions.quantity || 1 }}</p>
         </div>
 
         <!-- ボタン -->
@@ -39,7 +39,7 @@
           <!--<button class="btn btn-outline-secondary" @click="$router.back()">
             ← 戻る
           </button>-->
-          <PurchaseButton v-if="product.id" :product-id="product.id" />
+          <PurchaseButton v-if="product.id" :product-id="product.id" :selected-options="selectedOptions" />
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ export default {
     data: function() {
         return {
             product: {},
-            selectedOptions: { color: '', size: '' }
+            selectedOptions: { color: '', size: '', quantity: 1 }
         }
     },
     methods: {
