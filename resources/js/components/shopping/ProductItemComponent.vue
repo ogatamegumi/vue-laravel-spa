@@ -1,64 +1,87 @@
 <template>
-  <div class="container my-5">
-    <div class="row g-4 align-items-center">
-      <div class="col-md-6 text-center">
-        <img
-          :src="product.image || '/images/cat.jpg'"
-          class="img-fluid rounded shadow"
-          style="width: 400px; height: 300px; object-fit: cover;"
-          alt="商品画像"
-        />
-      </div>
-      <div class="col-md-6">
-        <h2 class="fw-bold mb-3">{{ product.name }}</h2>
-        <p class="text-muted mb-4">{{ product.description }}</p>
+    <div class="container my-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center">
+                <img
+                    :src="product.image || '/images/cat.jpg'"
+                    class="img-fluid rounded shadow"
+                    style="width: 400px; height: 300px; object-fit: cover"
+                    alt="商品画像"
+                />
+            </div>
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-3">{{ product.name }}</h2>
+                <p class="text-muted mb-4">{{ product.description }}</p>
 
-        <h3 class="text-danger fw-bold mb-4">
-          {{ product.price }} 円
-        </h3>
+                <h3 class="text-danger fw-bold mb-4">{{ product.price }} 円</h3>
 
-        <div v-if="product.options">
-            <ProductOptions
-                :options="product.options"
-                v-model="selectedOptions"
-            />
-        </div>
-        <CartPreview :selected-options="selectedOptions" />
+                <div v-if="product.options">
+                    <ProductOptions
+                        :options="product.options"
+                        v-model="selectedOptions"
+                    />
+                </div>
+                <CartPreview :selected-options="selectedOptions" />
 
-         <div class="d-flex gap-3">
-          <!--<button class="btn btn-outline-secondary" @click="$router.back()">
+                <div class="d-flex gap-3">
+                    <!--<button class="btn btn-outline-secondary" @click="$router.back()">
             ← 戻る
           </button>-->
-          <PurchaseButton v-if="product.id" :product-id="product.id" :selected-options="selectedOptions" />
+                    <PurchaseButton
+                        v-if="product.id"
+                        :purchased="purchased"
+                        @purchase="purchase"
+                        @go-to-cart="goToCart"
+                        :product-id="product.id"
+                        :selected-options="selectedOptions"
+                    />
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
-
 <script>
-import ProductOptions from './ProductOptionsComponent.vue';
-import PurchaseButton from './PurchaseButtonComponent.vue';
-import CartPreview from './CartPreviewComponent.vue';
+import ProductOptions from "./ProductOptionsComponent.vue";
+import PurchaseButton from "./PurchaseButtonComponent.vue";
+import CartPreview from "./CartPreviewComponent.vue";
+import axios from 'axios';
 
 export default {
     props: {
         productId: Number,
         requires: true,
     },
-    data: function() {
+    data: function () {
         return {
             product: {},
-            selectedOptions: { color: '', size: '', quantity: 1 }
-        }
+            selectedOptions: { color: "", size: "", quantity: 1 },
+            purchased: false,
+        };
     },
+    emits: [
+        'purchased',
+        'go-to-cart'
+    ],
     methods: {
         getProduct() {
-            axios.get('/api/product/' + this.productId)
-                .then((res) => {
-                    this.product = res.data;
-                });
+            axios.get("/api/product/" + this.productId).then((res) => {
+                this.product = res.data;
+            });
+        },
+        async purchase() {
+            await axios.post("/api/purchase", {
+                product_id: this.productId,
+                quantity: this.selectedOptions.quantity,
+                options: {
+                    color: this.selectedOptions.color,
+                    size: this.selectedOptions.size,
+                }
+            });
+            this.purchased = true;
+        },
+        goToCart() {
+            this.$router.push({ name: 'cart' });
         }
     },
     mounted() {
@@ -69,5 +92,5 @@ export default {
         PurchaseButton,
         CartPreview,
     },
-}
+};
 </script>
