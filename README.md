@@ -16,3 +16,8 @@ feature →
 migration → `php artisan migrate`
 
 seeder → `php artisan db:seed`
+
+tinker → 
+`php artisan tinker`
+
+任意のテーブルの全レコードを取得 → `\App\Models\[モデル名]::all();`

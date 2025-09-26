@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import ShopPageComponent from './shopping/ShopPageComponent.vue';
+
   export default {
     data: function() {
       return {

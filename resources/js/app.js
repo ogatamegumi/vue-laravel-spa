@@ -8,6 +8,9 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import TaskShowComponent from './components/TaskShowComponent.vue';
 import TaskCreateComponent from './components/TaskCreateComponent.vue';
 import TaskEditComponent from './components/TaskEditComponent.vue';
+import ShopPageComponent from './components/shopping/ShopPageComponent.vue';
+import ProductItemComponent from './components/shopping/ProductItemComponent.vue';
+import MyCartComponent from './components/shopping/MyCartComponent.vue';
 
 const routes = [
   {
@@ -31,7 +34,23 @@ const routes = [
     name: 'task.edit',
     component: TaskEditComponent,
     props: true
-  }
+  },
+  {
+    path: '/shopping',
+    name: 'shopping.list',
+    component: ShopPageComponent,
+  },
+  {
+    path: '/product/:productId',
+    name: 'product.show',
+    component: ProductItemComponent,
+    props: route => ({ productId: Number(route.params.productId) })
+  },
+  {
+    path: '/purchase',
+    name: 'cart',
+    component: MyCartComponent
+  },
 ];
 
 const router = createRouter({
