@@ -1,8 +1,6 @@
 <template>
     <button class="btn btn-primary" @click="purchase">
-        <!--このボタンをクリックしたら、PurchaseController@storeを呼び出す-->
-        <!--このボタンは、ProductListコンポーネント内に配置する-->
-        🛒購入
+        🛒カートに入れる
     </button>
     <button v-if="purchased" class="btn btn-primary" @click="goToCart">
         カートを見る
