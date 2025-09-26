@@ -8,6 +8,7 @@
           <th>色</th>
           <th>サイズ</th>
           <th>数量</th>
+          <th>お値段</th>
           <th>削除</th>
         </tr>
       </thead>
@@ -17,7 +18,14 @@
           <td>{{ item.options.color }}</td>
           <td>{{ item.options.size }}</td>
           <td>{{ item.quantity }}</td>
-          <button class="btn" @click="deleteItem(item.id)">×</button>
+          <td>{{ item.product.price }}円</td>
+          <td>
+            <button class="btn" @click="deleteItem(item.id)">×</button>
+          </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="font-weight: bold;">合計</td>
+            <td>{{ totalPrice }}円</td>
         </tr>
       </tbody>
     </table>
@@ -34,11 +42,19 @@ export default {
             purchases: [],
         };
     },
+    computed: {
+        totalPrice() {
+            return this.purchases.reduce((sum, item) => {
+                return sum + (item.product.price * item.quantity);
+            }, 0);
+        }
+    },
     methods: {
         getPurchase() {
             axios.get('/api/purchase/')
                 .then((res) => {
                     this.purchases = res.data;
+                    console.log(res)
                 });
         },
         deleteItem(id) {
