@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ShoppingController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::put('/tasks/{task}', [TaskController::class, 'update']);
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
 Route::get('/shopping', [ShoppingController::class, 'index']);
 Route::get('/product/{product}', [ShoppingController::class, 'show']);
+Route::post('/purchases', [PurchaseController::class, 'store']);
