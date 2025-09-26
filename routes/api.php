@@ -29,3 +29,4 @@ Route::get('/shopping', [ShoppingController::class, 'index']);
 Route::get('/product/{product}', [ShoppingController::class, 'show']);
 Route::post('/purchase', [PurchaseController::class, 'store']);
 Route::get('/purchase', [PurchaseController::class, 'index']);
+Route::delete('/purchase/{purchase}', [PurchaseController::class, 'destroy']);
