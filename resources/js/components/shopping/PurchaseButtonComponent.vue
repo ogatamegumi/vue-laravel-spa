@@ -4,6 +4,9 @@
         <!--このボタンは、ProductListコンポーネント内に配置する-->
         🛒購入
     </button>
+    <button v-if="purchased" class="btn btn-primary" @click="goToCart">
+        カートを見る
+    </button>
 </template>
 
 <script>
@@ -17,13 +20,22 @@ export default {
             required: true,
         },
     },
+    data() {
+        return {
+            purchased: false
+        };
+    },
     methods: {
         async purchase() {
-            await axios.post("/api/purchases", {
+            await axios.post("/api/purchase", {
                 product_id: this.productId,
                 quantity: 1,
             });
+            this.purchased = true;
         },
+        goToCart() {
+            this.$router.push({ name: 'cart' });
+        }
     },
 };
 </script>

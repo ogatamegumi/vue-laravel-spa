@@ -13,7 +13,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $purchases = Purchase::with('product')->get();
+        return response()->json($purchases);
     }
 
     /**
